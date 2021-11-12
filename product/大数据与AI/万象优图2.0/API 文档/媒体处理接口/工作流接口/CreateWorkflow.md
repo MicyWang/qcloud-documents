@@ -28,7 +28,7 @@ Content-Type: application/xml
 
 该请求操作的实现需要有如下请求体：
 
-#### 请求体1：音视频转码、极速高清、截帧、转动图、人声分离、精彩集锦、音视频拼接、智能封面、视频增强、SDR to HDR、自定义函数、超分辨率和音视频分段
+#### 请求体1：音视频转码、极速高清、截帧、转动图、人声分离、精彩集锦、音视频拼接、智能封面、视频增强、SDR to HDR、SCF函数、超分辨率和音视频分段
 
 
 ```plaintext
@@ -189,7 +189,7 @@ Content-Type: application/xml
                     <Type>SCF</Type>
                     <Operation>
                         <SCF>
-                            <Region>ap-chengduRegion>
+                            <Region>ap-chengdu</Region>
                             <FunctionName>test</FunctionName>
                             <Namespace>testspace</Namespace>
                         </SCF>
@@ -364,8 +364,8 @@ Container 类型 Nodes 的具体数据描述如下：
 | SDRtoHDR\_\*\*\*       | Request.MediaWorkflow.</br>Topology.Nodes | SDRtoHDR 节点    | Container | 否           | 节点名称以 SDRtoHDR 为前缀，可能有多个 SDRtoHDR 节点             |
 | VideoProcess\_\*\*\*   | Request.MediaWorkflow.</br>Topology.Nodes | 视频处理节点    | Container | 否           | 节点名称以 VideoProcess 为前缀，可能有多个视频处理节点         |
 | SCF\_\*\*\*            | Request.MediaWorkflow.</br>Topology.Nodes | SCF 函数节点     | Container | 否           | 节点名称以 SCF 为前缀，可能有多个 SCF 函数节点                   |
-| SuperResolution\_\*\*\* | Request.MediaWorkflow.</br>Topology.Nodes | 超分辨率节点 | Container| 否 | 节点名称以 SuperResolution 为前缀，可能有多个超分辨率节点 |
-| Segment\_\*\*\* | Request.MediaWorkflow.</br>Topology.Nodes | 音视频分段节点 | Container| 否 | 节点名称以 Segment 为前缀，可能有多个音视频分段节点 |
+| SuperResolution\_\*\*\* | Request.MediaWorkflow.</br>Topology.Nodes | 超分辨率节点 | Container| 否 | 节点名称以SuperResolution为前缀，可能有多个超分辨率节点 |
+| Segment\_\*\*\* | Request.MediaWorkflow.</br>Topology.Nodes | 音视频分段节点 | Container| 否 | 节点名称以Segment为前缀，可能有多个音视频分段节点 |
 
 Container 类型 Start 的具体数据描述如下：
 
@@ -404,7 +404,7 @@ Container 类型 Start.Input.ExtFilter 的具体数据描述如下：
 | ContentType        | Request.MediaWorkflow.Topology.</br>Nodes.Start.Input.ExtFilter | 打开 ContentType 限制 | String | 否   | false  | false/true                                                   |
 | Custom             | Request.MediaWorkflow.Topology.</br>Nodes.Start.Input.ExtFilter | 打开自定义后缀限制  | String | 否   | false  | false/true                                                   |
 | CustomExts         | Request.MediaWorkflow.Topology.</br>Nodes.Start.Input.ExtFilter | 自定义后缀          | String | 否   | 无     | 1. 多种文件后缀以/分隔，后缀个数不超过10个</br>2. 当 Custom 为 true 时，该参数必填 |
-| AllFile    | Request.MediaWorkflow.Topology.Nodes.Start.Input.ExtFilter | 所有文件          |  String  |  否   | false    |  false/true  |
+| AllFile    | Request.MediaWorkflow.Topology.Nodes.Start.Input.ExtFilter|所有文件          ｜ String ｜否｜false｜false/true｜
 
 
 Container 类型 Animation\_\*\*\* 的具体数据描述如下：
@@ -451,7 +451,7 @@ Container 类型 Output 的具体数据描述如下：
 | Region             | Request.MediaWorkflow.Topology.<br>Nodes.Snapshot\_\*\*\*.Operation.Output | 存储桶的地域 | String | 是           | 无                                                           |
 | Bucket             | Request.MediaWorkflow.Topology.<br>Nodes.Snapshot\_\*\*\*.Operation.Output | 存储桶的名称 | String | 是           | 无                                                           |
 | Object             | Request.MediaWorkflow.Topology.<br>Nodes.Snapshot\_\*\*\*.Operation.Output | 结果文件名称 | String | 否           | <li>abc/${RunId}/snapshot-${number}.${Ext}<br/><li>bcd/${RunId}/snapshot-${number}.jpg |
-| SpriteObject       | Request.MediaWorkflow.Topology.<br>Nodes.Snapshot\_\*\*\*.Operation.Output | 雪碧图的名称 | String | 否           | <li>abc/${RunId}/snapshot-${number}.jpg<br/><li>bcd/${RunId}/snapshot-${number}.jpg  |
+| SpriteObject       | Request.MediaWorkflow.Topology.<br>Nodes.Snapshot\_\*\*\*.Operation.Output | 雪碧图的名称 | String | 否           | <li>abc/${RunId}/snapshot-${number}.jpg<br/><li>bcd/${RunId}/snapshot-${number}.jpg ｜
 
 Container 类型 SmartCover_*** 的具体数据描述如下：
 
@@ -482,7 +482,7 @@ Container 类型 SmartCover_***.SmartCover 的具体数据类型描述如下：
 | Format             | Request.Operation.SmartCover | 封面图片类型    | String | 是  | 无 | png、jpg、webp  |
 | Width              | Request.Operation.SmartCover | 封面图片宽度    | String | 是  | 无 | 1. 值范围：[128，4096]<br/> 2. 单位：px<br/> |
 | Height             | Request.Operation.SmartCover | 封面图片高度    | String | 是  | 无 | 1. 值范围：[128，4096]<br/> 2. 单位：px<br/> |
-| Count              | Request.Operation.SmartCover | 封面数量        | String | 否  | 3 | 值范围：[1，10] |
+| Count              | Request.Operation.SmartCover | 封面数量        | String | 否  | 3 | 1. 值范围：[1，10]<br/> |
 | DeleteDuplicates   | Request.Operation.SmartCover | 封面是否去重    | String | 否  | false | true/false |
 
 Container 类型 Transcode_*** 的具体数据描述如下：
@@ -613,7 +613,7 @@ Container 类型 VideoStream\_\*\*\*.Operation 的具体数据描述如下：
 | ------------------ | ------- | ------| --------- | ---- | ---- |
 | TemplateId   | Request.MediaWorkflow.Topology.</br>Nodes.VideoStream\_\*\*\*.Operation | 模板 ID  | String    | 是   | 无 |
 | Output       | Request.MediaWorkflow.Topology.</br>Nodes.VideoStream\_\*\*\*.Operation | 输出地址 | Container | 是   | 无 |
-| WatermarkTemplateId   | Request.MediaWorkflow.Topology.</br>Nodes.VideoStream\_\*\*\*.Operation | 水印模板 ID  | String    | 是   | 可以使用多个水印模板，不超过3个 |
+| WatermarkTemplateId   | Request.MediaWorkflow.Topology.</br>Nodes.VideoStream\_\*\*\*.Operation | 水印模板 ID  | String    | 是   | 可以使用多个水印模板,不超过3个 |
 | RemoveWatermark       | Request.MediaWorkflow.Topology.</br>Nodes.VideoStream\_\*\*\*.Operation | 去除水印参数        | Container | 否   |无|
 
 Container 类型 VideoStream\_\*\*\*.Output 的具体数据描述如下：
@@ -750,9 +750,9 @@ Container 类型 SuperResolution\_\*\*\*.Operation 的具体数据描述如下�
 
 | 节点名称（关键字） | 父节点                                                 | 描述        | 类型      | 是否必选 | 限制 |
 | ------------------ | ---------------------------------------------------------- | -------- | ------ | ---- | ---- |
-| TemplateId   | Request.MediaWorkflow.Topology.<br>Nodes.SuperResolution\_\*\*\*.Operation | 模板 ID  | String    | 是   | 无 |
-| TranscodeTemplateId | Request.MediaWorkflow.Topology..<br>Nodes.SuperResolution\_\*\*\*.Operation | 转码模板 ID  | String    | 是   | 无 |
-| WatermarkTemplateId | Request.MediaWorkflow.Topology..<br>Nodes.SuperResolution***.Operation | 水印模板 ID  | String    | 否   | 可以使用多个水印模板，不超过3个 |
+| TemplateId   | Request.MediaWorkflow.Topology.<br>Nodes.SuperResolution\_\*\*\*.Operation | 模板ID  | String    | 是   | 无 |
+| TranscodeTemplateId | Request.MediaWorkflow.Topology..<br>Nodes.SuperResolution\_\*\*\*.Operation | 转码模板ID  | String    | 是   | 无 |
+| WatermarkTemplateId | Request.MediaWorkflow.Topology..<br>Nodes.SuperResolution***.Operation | 水印模板ID  | String    | 否   | 可以使用多个水印模板,不超过3个 |
 | Output       | Request.MediaWorkflow.Topology.<br>Nodes.SuperResolution\_\*\*\*.Operation | 输出地址 | Container | 是   | 无 |
 
 
@@ -764,6 +764,7 @@ Container 类型 Output 的具体数据描述如下：
 | Bucket             | Request.MediaWorkflow.Topology.<br>Nodes.SuperResolution\_\*\*\*.Operation.Output | 存储桶的名称 | String | 是           | 无                                                     |
 | Object   | Request.MediaWorkflow.Topology.<br>Nodes.SuperResolution\_\*\*\*.Operation.Output | 结果文件名称  | String  | 是  | 无 |
 
+</br>
 
 Container 类型 Segment\_\*\*\* 的具体数据描述如下：
 
@@ -784,7 +785,7 @@ Container 类型 Segment 的具体数据描述如下：
 | 节点名称（关键字） | 父节点                                                 | 描述        | 类型      | 是否必选 | 限制 |
 | ------------------ | ---------------------------------------------------------- | -------- | ------ | ---- | ---- |
 | Format            | Request.MediaWorkflow.Topology.<br>Nodes.Segment\_\*\*\*.Operation.Segment | 封装格式 | String | 是  | aac、mp3、flac、mp4、ts、mkv、avi |
-| Duration          | Request.MediaWorkflow.Topology.<br>Nodes.Segment\_\*\*\*.Operation.Segment | 分段时长，单位：秒 | String | 是  | 不小于5的整数|
+| Duration          | Request.MediaWorkflow.Topology.<br>Nodes.Segment\_\*\*\*.Operation.Segment | 分段时长,单位:秒 | String | 是  | 不小于5的整数|
 
 Container 类型 Output 的具体数据描述如下：
 
@@ -792,8 +793,8 @@ Container 类型 Output 的具体数据描述如下：
 | ------------------ | ---------------------------------------------------------- | -------- | ------ | ---- | ---- |
 | Region             | Request.MediaWorkflow.Topology.<br>Nodes.Segment\_\*\*\*.Operation.Output | 存储桶的地域 | String | 是     | 无                                                     |
 | Bucket             | Request.MediaWorkflow.Topology.<br>Nodes.Segment\_\*\*\*.Operation.Output | 存储桶的名称 | String | 是     | 无                                                     |
-| Object   | Request.MediaWorkflow.Topology.<br>Nodes.Segment\_\*\*\*.Operation.Output | 结果文件名称  | String  | 是  | 必须包含${Number}参数，<br>作为自定义分段后每一小段音/视频流的输出序号 |
-
+| Object   | Request.MediaWorkflow.Topology.<br>Nodes.Segment\_\*\*\*.Operation.Output | 结果文件名称  | String  | 是  | 必须包含${Number}参数,<br>作为自定义分段后每一小段音/视频流的输出序号 |
+</br>
 
 ## 响应
 
@@ -805,7 +806,7 @@ Container 类型 Output 的具体数据描述如下：
 
 该响应体返回为 **application/xml** 数据，包含完整节点数据的内容展示如下：
 
-#### 响应体1：音视频转码、极速高清、截帧、转动图、人声分离、精彩集锦、音视频拼接、智能封面、视频增强、SDR to HDR、自定义函数、超分辨率和音视频分段
+#### 响应体1：音视频转码、极速高清、截帧、转动图、人声分离、精彩集锦、音视频拼接、智能封面、视频增强、SDR to HDR、SCF函数、超分辨率和音视频分段
 
 
 ```plaintext
@@ -967,7 +968,7 @@ Container 类型 Output 的具体数据描述如下：
                     <Type>SCF</Type>
                     <Operation>
                         <SCF>
-                            <Region>ap-chengduRegion>
+                            <Region>ap-chengdu</Region>
                             <FunctionName>test</FunctionName>
                             <Namespace>testspace</Namespace>
                         </SCF>
@@ -1133,7 +1134,7 @@ Container节点 MediaWorkflow 的内容：
 
 ## 实际案例
 
-#### 请求1：音视频转码、极速高清、截帧、转动图、人声分离、精彩集锦、智能封面、音视频拼接、自定义函数、超分辨率和音视频分段示例
+#### 请求1：音视频转码、极速高清、截帧、转动图、人声分离、精彩集锦、智能封面、音视频拼接、SCF函数、超分辨率和音视频分段示例
 
 ```plaintext
 POST /workflow HTTP/1.1
@@ -1299,7 +1300,7 @@ Content-Type: application/xml
                     <Type>SCF</Type>
                     <Operation>
                         <SCF>
-                            <Region>ap-chengduRegion>
+                            <Region>ap-chengdu</Region>
                             <FunctionName>test</FunctionName>
                             <Namespace>testspace</Namespace>
                         </SCF>
@@ -1507,7 +1508,7 @@ x-ci-request-id: NTk0MjdmODlfMjQ4OGY3XzYzYzhf****
                     <Type>SCF</Type>
                     <Operation>
                         <SCF>
-                            <Region>ap-chengduRegion>
+                            <Region>ap-chengdu</Region>
                             <FunctionName>test</FunctionName>
                             <Namespace>testspace</Namespace>
                         </SCF>
@@ -1721,4 +1722,3 @@ x-ci-request-id: NTk0MjdmODlfMjQ4OGY3XzYzYzhf****
     </MediaWorkflow>
 </Response>
 ```
-
